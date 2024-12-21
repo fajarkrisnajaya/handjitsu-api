@@ -27,4 +27,13 @@ const updateGame = async (req, res) => {
   }
 };
 
-module.exports = { createGame, getGameById, updateGame };
+const createSinglePlayerGame = async (req, res) => {
+  try {
+    const game = await gameService.createSinglePlayerGame(req.body);
+    res.status(201).json({ data: game });
+  } catch (error) {
+    res.status(error.statusCode || 500).json({ error: error.message });
+  }
+};
+
+module.exports = { createGame, getGameById, updateGame, createSinglePlayerGame };

@@ -26,6 +26,19 @@ const getGameById = async (id) => {
   return game;
 };
 
+const createSinglePlayerGame = async (gameData) => {
+  const botChoices = ['rock', 'paper', 'scissors'];
+  const botChoice = botChoices[Math.floor(Math.random() * botChoices.length)];
+  const game = {
+    ...gameData,
+    Player2ID: 'bot', // You can use a special ID or name for the bot
+    Player2_choice: botChoice,
+  };
+  game.WinnerID = determineWinner(game.Player1ID, game.Player2ID, game.Player1_choice, game.Player2_choice);
+  const result = await gameRepository.createGame(game);
+  return result;
+};
+
 const determineWinner = (player1ID, player2ID, player1Choice, player2Choice) => {
   if (player1Choice === player2Choice) {
     return null; // It's a tie
@@ -40,4 +53,4 @@ const determineWinner = (player1ID, player2ID, player1Choice, player2Choice) => 
   }
 };
 
-module.exports = { createGame, updateGame, getGameById };
+module.exports = { createGame, updateGame, getGameById, createSinglePlayerGame };
