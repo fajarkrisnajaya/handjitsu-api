@@ -1,38 +1,52 @@
 const pool = require('../db/db');
 
-const createGame = async (gameData) => {
-  const { Player1ID, Player1_choice, Player2ID, Player2_choice, WinnerID, link_room } = gameData;
-  const result = await pool.query(
-    `INSERT INTO "public"."Game" ("Player1ID", "Player1_choice", "Player2ID", "Player2_choice", "WinnerID", "link_room") 
-     VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-    [Player1ID, Player1_choice, Player2ID, Player2_choice, WinnerID, link_room]
-  );
-  return result.rows[0];
-};
+const gameRepository = require('../repositories/games.repository');
 
-const createSinglePlayerGame = async (gameData) => {
-  const { Player1ID, link_room } = gameData;
-  const Player2ID = 9999; // Special ID for the bot
-  const result = await pool.query(
-    `INSERT INTO "public"."Game" ("Player1ID", "Player2ID", "link_room") 
-     VALUES ($1, $2, $3) RETURNING *`,
-    [Player1ID, Player2ID, link_room]
-  );
-  return result.rows[0];
+const createGame = async (gameData) => {
+  const game = await gameRepository.createGame(gameData);
+  return game;
 };
 
 const updateGame = async (gameId, gameData) => {
-  const { Player1_choice, Player2_choice, WinnerID } = gameData;
-  const result = await pool.query(
-    `UPDATE "public"."Game" SET "Player1_choice" = $1, "Player2_choice" = $2, "WinnerID" = $3 WHERE "GameID" = $4 RETURNING *`,
-    [Player1_choice, Player2_choice, WinnerID, gameId]
-  );
-  return result.rows[0];
+  const game = await gameRepository.getGameById(gameId);
+  if (!game) {
+    throw new Error("Game not found");
+  }
+  const updatedGame = { ...game, ...gameData };
+  if (updatedGame.Player1_choice && !updatedGame.Player2_choice) {
+    const botChoices = ['rock', 'paper', 'scissors'];
+    updatedGame.Player2_choice = botChoices[Math.floor(Math.random() * botChoices.length)];
+    updatedGame.WinnerID = determineWinner(updatedGame.Player1ID, updatedGame.Player2ID, updatedGame.Player1_choice, updatedGame.Player2_choice);
+  }
+  const result = await gameRepository.updateGame(gameId, updatedGame);
+  return result;
 };
 
 const getGameById = async (id) => {
-  const result = await pool.query('SELECT * FROM "public"."Game" WHERE "GameID" = $1', [id]);
-  return result.rows[0];
+  const game = await gameRepository.getGameById(id);
+  if (!game) {
+    throw new Error("Game not found");
+  }
+  return game;
 };
 
-module.exports = { createGame, createSinglePlayerGame, updateGame, getGameById };
+const createSinglePlayerGame = async (gameData) => {
+  const game = await gameRepository.createSinglePlayerGame(gameData);
+  return game;
+};
+
+const determineWinner = (player1ID, player2ID, player1Choice, player2Choice) => {
+  if (player1Choice === player2Choice) {
+    return null; // It's a tie
+  } else if (
+    (player1Choice === 'rock' && player2Choice === 'scissors') ||
+    (player1Choice === 'scissors' && player2Choice === 'paper') ||
+    (player1Choice === 'paper' && player2Choice === 'rock')
+  ) {
+    return player1ID;
+  } else {
+    return player2ID;
+  }
+};
+
+module.exports = { createGame, updateGame, getGameById, createSinglePlayerGame };
