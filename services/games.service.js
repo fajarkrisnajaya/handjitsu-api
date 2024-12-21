@@ -31,7 +31,7 @@ const createSinglePlayerGame = async (gameData) => {
   const botChoice = botChoices[Math.floor(Math.random() * botChoices.length)];
   const game = {
     ...gameData,
-    Player2ID: 'bot', // You can use a special ID or name for the bot
+    Player2ID: 9999, // Use the special ID for the bot
     Player2_choice: botChoice,
   };
   game.WinnerID = determineWinner(game.Player1ID, game.Player2ID, game.Player1_choice, game.Player2_choice);
