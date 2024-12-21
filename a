@@ -1,0 +1,29 @@
+[33mcommit c57351984297339ef478ff1ca895f06fa157bab0[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 01:21:48 2024 +0700
+
+    fix game with put method
+
+[33mcommit df126aebb4b4c68913899136ecb4c27b44dde0a9[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 01:04:02 2024 +0700
+
+    game service fix
+
+[33mcommit 05b6395f5efa95896568920dc46bef1868f5dfd2[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 01:00:35 2024 +0700
+
+    game root in index.js fixes
+
+[33mcommit bfd2fed064b2e37ce9c5fc7cdfc525eba1ef6e80[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 00:49:03 2024 +0700
+
+    feat: game endpoint
+
+[33mcommit 215e0a37596066879f3c082e38021279e43b4332[m[33m ([m[1;31morigin/frontend[m[33m)[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Thu Dec 19 22:01:54 2024 +0700
+
+    init

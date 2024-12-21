@@ -18,4 +18,13 @@ const getGameById = async (req, res) => {
   }
 };
 
-module.exports = { createGame, getGameById };
+const updateGame = async (req, res) => {
+  try {
+    const game = await gameService.updateGame(req.params.id, req.body);
+    res.status(200).json({ data: game });
+  } catch (error) {
+    res.status(error.statusCode || 500).json({ error: error.message });
+  }
+};
+
+module.exports = { createGame, getGameById, updateGame };
