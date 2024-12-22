@@ -7,7 +7,6 @@ const registerSchema = Joi.object({
   username: Joi.string().required(),
   password: Joi.string().required(),
   avatar_url: Joi.string().optional(),
-  fullname: Joi.string().optional(), // Ensure this line is present
 });
 
 const loginSchema = Joi.object({

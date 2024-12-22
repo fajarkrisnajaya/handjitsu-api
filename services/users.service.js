@@ -18,7 +18,6 @@ const createUser = async (userData) => {
     avatar_url: userData.avatar_url
   };
 
-
   user = await userRepository.createUser(newUser);
   return user;
 };
