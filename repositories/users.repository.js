@@ -68,6 +68,7 @@ const updateUserWinCount = async (winnerID) => {
     // Update winrate in leaderboard
     await pool.query("UPDATE leaderboard SET winrate = $1 WHERE user_id = $2", [winrate, winnerID]);
   } catch (error) {
+    console.error(error);
     throw new Error("Something went wrong while updating win count and winrate");
   }
 };
