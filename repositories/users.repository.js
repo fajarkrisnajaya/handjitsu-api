@@ -27,7 +27,7 @@ const createUser = async (user) => {
   try {
     const result = await pool.query(
       "INSERT INTO users (email, username, fullname, password, avatar_url) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [email, username, fullname, password, avatar_url]
+      [email, username, fullname || null, password, avatar_url] // Ensure fullname can be null
     );
     return result.rows[0];
   } catch (error) {
