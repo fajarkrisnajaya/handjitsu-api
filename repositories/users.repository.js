@@ -61,4 +61,4 @@ const updateUserWinCount = async (winnerID) => {
   }
 };
 
-module.exports = { createUser, findUserByEmail, findUserById, findTransactionById, updateUserBalance };
+module.exports = { createUser, findUserByEmail, findUserById, findTransactionById, updateUserBalance, updateUserWinCount };
