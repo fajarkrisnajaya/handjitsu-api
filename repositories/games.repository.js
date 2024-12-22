@@ -1,4 +1,4 @@
-const pool = require('../db');
+const pool = require('../db/db');
 
 const createGame = async (gameData) => {
   console.log('createGame called with:', gameData);
