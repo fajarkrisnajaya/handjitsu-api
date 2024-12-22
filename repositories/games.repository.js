@@ -36,6 +36,11 @@ const updateGame = async (gameId, gameData) => {
     await updateUserWinCount(WinnerID);
   }
 
+  await pool.query(
+    `UPDATE users SET games_count = games_count + 1 WHERE id = $1`,
+    [Player1ID]
+  );
+
   return result.rows[0];
 };
 
