@@ -1,4 +1,5 @@
 const pool = require('../db/db');
+const { updateUserWinCount } = require('./users.repository');
 
 const createGame = async (gameData) => {
   const { Player1ID, Player1_choice, Player2ID, Player2_choice, WinnerID, link_room } = gameData;
@@ -30,6 +31,11 @@ const updateGame = async (gameId, gameData) => {
     `UPDATE "public"."Game" SET "Player1_choice" = $1, "Player2_choice" = $2, "WinnerID" = $3 WHERE "GameID" = $4 RETURNING *`,
     [Player1_choice, Player2_choice, WinnerID, gameId]
   );
+
+  if (WinnerID) {
+    await updateUserWinCount(WinnerID);
+  }
+
   return result.rows[0];
 };
 

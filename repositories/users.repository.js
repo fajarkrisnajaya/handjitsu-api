@@ -53,4 +53,12 @@ const updateUserBalance = async (id, balance) => {
   }
 };
 
-module.exports = { createUser, findUserByEmail, findUserById, findTransactionById, updateUserBalance };
+const updateUserWinCount = async (winnerID) => {
+  try {
+    await pool.query("UPDATE users SET win_count = win_count + 1 WHERE id = $1", [winnerID]);
+  } catch (error) {
+    throw new Error("Something went wrong while updating win count");
+  }
+};
+
+module.exports = { createUser, findUserByEmail, findUserById, findTransactionById, updateUserBalance, updateUserWinCount };
