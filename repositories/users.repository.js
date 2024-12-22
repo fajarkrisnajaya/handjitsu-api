@@ -55,10 +55,20 @@ const updateUserBalance = async (id, balance) => {
 
 const updateUserWinCount = async (winnerID) => {
   try {
+    // Increment win count in users table
     await pool.query("UPDATE users SET win_count = win_count + 1 WHERE id = $1", [winnerID]);
+
+    // Fetch the updated win_count and games_count from users
+    const result = await pool.query("SELECT win_count, games_count FROM users WHERE id = $1", [winnerID]);
+    const { win_count, games_count } = result.rows[0];
+
+    // Calculate winrate
+    const winrate = (win_count * 100.0 / NULLIF(games_count, 0));
+
+    // Update winrate in leaderboard
+    await pool.query("UPDATE leaderboard SET winrate = $1 WHERE user_id = $2", [winrate, winnerID]);
   } catch (error) {
-    throw new Error("Something went wrong while updating win count");
+    throw new Error("Something went wrong while updating win count and winrate");
   }
 };
-
 module.exports = { createUser, findUserByEmail, findUserById, findTransactionById, updateUserBalance, updateUserWinCount };
