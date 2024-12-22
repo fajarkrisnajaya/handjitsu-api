@@ -7,6 +7,7 @@ const registerSchema = Joi.object({
   username: Joi.string().required(),
   password: Joi.string().required(),
   avatar_url: Joi.string().optional(),
+  fullname: Joi.string().optional(), // Ensure this line is present
 });
 
 const loginSchema = Joi.object({
@@ -38,9 +39,6 @@ const topup = async (req, res) => {
   }
 };
 
-
-
-
 const getTransactionsById = async (req, res) => {
   try {
     const { id } = req.user;
@@ -53,7 +51,6 @@ const getTransactionsById = async (req, res) => {
     res.status(error.statusCode || 500).json({ error: error.message });
   }
 };
-
 
 const createUser = async (req, res) => {
   try {
@@ -69,8 +66,6 @@ const createUser = async (req, res) => {
     res.status(error.statusCode || 500).json({ error: error.message });
   }
 };
-
-
 
 const login = async (req, res) => {
   try {
@@ -93,4 +88,4 @@ const login = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-module.exports = { createUser, getUserById, login,getTransactionsById, topup };
+module.exports = { createUser, getUserById, login, getTransactionsById, topup };
