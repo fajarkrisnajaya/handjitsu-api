@@ -1,55 +1,53 @@
-const pool = require('../db/db');
+const pool = require('../db');
 
 const createGame = async (gameData) => {
-  const { Player1ID, Player1_choice, Player2ID, Player2_choice, WinnerID, link_room } = gameData;
   const result = await pool.query(
-    `INSERT INTO "public"."Game" ("Player1ID", "Player1_choice", "Player2ID", "Player2_choice", "WinnerID", "link_room") 
-     VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-    [Player1ID, Player1_choice, Player2ID, Player2_choice, WinnerID, link_room]
+    `INSERT INTO "public"."Game" ("Player1ID", "Player1_choice", "Player2_choice", "WinnerID") VALUES ($1, $2, $3, $4) RETURNING *`,
+    [gameData.Player1ID, gameData.Player1_choice, gameData.Player2_choice, gameData.WinnerID]
   );
   return result.rows[0];
 };
 
-const createSinglePlayerGame = async (gameData) => {
-  const { Player1ID, link_room } = gameData;
-  const Player2ID = 9999; // Special ID for the bot
-  const result = await pool.query(
-    `INSERT INTO "public"."Game" ("Player1ID", "Player2ID", "link_room") 
-     VALUES ($1, $2, $3) RETURNING *`,
-    [Player1ID, Player2ID, link_room]
-  );
+const getGameById = async (gameId) => {
+  const result = await pool.query(`SELECT * FROM "public"."Game" WHERE "GameID" = $1`, [gameId]);
   return result.rows[0];
 };
 
 const updateGame = async (gameId, gameData) => {
-  const { Player1_choice } = gameData;
-  const botChoices = ['rock', 'paper', 'scissors'];
-  const Player2_choice = botChoices[Math.floor(Math.random() * botChoices.length)];
-  const WinnerID = determineWinner(Player1_choice, Player2_choice);
+  const { Player1_choice, Player2_choice } = gameData;
+
+  // Fetch the current game state
+  const currentGame = await pool.query(`SELECT * FROM "public"."Game" WHERE "GameID" = $1`, [gameId]);
+  if (currentGame.rows.length === 0) {
+    throw new Error("Game not found");
+  }
+
+  const updatedPlayer1Choice = Player1_choice || currentGame.rows[0].Player1_choice;
+  const updatedPlayer2Choice = Player2_choice || currentGame.rows[0].Player2_choice;
+
+  const WinnerID = determineWinner(updatedPlayer1Choice, updatedPlayer2Choice);
   const result = await pool.query(
     `UPDATE "public"."Game" SET "Player1_choice" = $1, "Player2_choice" = $2, "WinnerID" = $3 WHERE "GameID" = $4 RETURNING *`,
-    [Player1_choice, Player2_choice, WinnerID, gameId]
+    [updatedPlayer1Choice, updatedPlayer2Choice, WinnerID, gameId]
   );
   return result.rows[0];
 };
 
-const getGameById = async (id) => {
-  const result = await pool.query('SELECT * FROM "public"."Game" WHERE "GameID" = $1', [id]);
-  return result.rows[0];
-};
-
-const determineWinner = (player1Choice, player2Choice) => {
-  if (player1Choice === player2Choice) {
-    return null; // It's a tie
-  } else if (
-    (player1Choice === 'rock' && player2Choice === 'scissors') ||
-    (player1Choice === 'scissors' && player2Choice === 'paper') ||
-    (player1Choice === 'paper' && player2Choice === 'rock')
+const determineWinner = (Player1_choice, Player2_choice) => {
+  if (Player1_choice === Player2_choice) return null;
+  if (
+    (Player1_choice === 'rock' && Player2_choice === 'scissors') ||
+    (Player1_choice === 'scissors' && Player2_choice === 'paper') ||
+    (Player1_choice === 'paper' && Player2_choice === 'rock')
   ) {
-    return 1; // Player1 wins
+    return 1; // Player 1 wins
   } else {
-    return 9999; // Player2 (bot) wins
+    return 2; // Player 2 wins
   }
 };
 
-module.exports = { createGame, createSinglePlayerGame, updateGame, getGameById };
+module.exports = {
+  createGame,
+  getGameById,
+  updateGame,
+};
