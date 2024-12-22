@@ -1,6 +1,7 @@
 const pool = require('../db');
 
 const createGame = async (gameData) => {
+  console.log('createGame called with:', gameData);
   const result = await pool.query(
     `INSERT INTO "public"."Game" ("Player1ID", "Player1_choice", "Player2_choice", "WinnerID") VALUES ($1, $2, $3, $4) RETURNING *`,
     [gameData.Player1ID, gameData.Player1_choice, gameData.Player2_choice, gameData.WinnerID]
@@ -9,11 +10,13 @@ const createGame = async (gameData) => {
 };
 
 const getGameById = async (gameId) => {
+  console.log('getGameById called with:', gameId);
   const result = await pool.query(`SELECT * FROM "public"."Game" WHERE "GameID" = $1`, [gameId]);
   return result.rows[0];
 };
 
 const updateGame = async (gameId, gameData) => {
+  console.log('updateGame called with:', gameId, gameData);
   const { Player1_choice, Player2_choice } = gameData;
 
   // Fetch the current game state
@@ -34,6 +37,7 @@ const updateGame = async (gameId, gameData) => {
 };
 
 const determineWinner = (Player1_choice, Player2_choice) => {
+  console.log('determineWinner called with:', Player1_choice, Player2_choice);
   if (Player1_choice === Player2_choice) return null;
   if (
     (Player1_choice === 'rock' && Player2_choice === 'scissors') ||
@@ -50,4 +54,5 @@ module.exports = {
   createGame,
   getGameById,
   updateGame,
+  determineWinner,
 };

@@ -65,4 +65,5 @@ module.exports = {
   getGameById,
   updateGame,
   createSinglePlayerGame,
+  determineWinner,
 };
