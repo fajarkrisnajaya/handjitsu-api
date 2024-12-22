@@ -52,7 +52,7 @@ const determineWinner = (player1Choice, player2Choice) => {
     (player1Choice === 'scissors' && player2Choice === 'paper') ||
     (player1Choice === 'paper' && player2Choice === 'rock')
   ) {
-    return 1; // Player1 wins
+    return player1ID; // Player1 wins
   } else {
     return 9999; // Player2 (bot) wins
   }
