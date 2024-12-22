@@ -46,7 +46,7 @@ const getGameById = async (id) => {
 
 const determineWinner = (Player1ID, Player2ID, player1Choice, player2Choice) => {
   if (player1Choice === player2Choice) {
-    return "tie"; // It's a tie
+    return 0; // It's a tie
   } else if (
     (player1Choice === 'rock' && player2Choice === 'scissors') ||
     (player1Choice === 'scissors' && player2Choice === 'paper') ||
