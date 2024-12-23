@@ -63,10 +63,6 @@ const topup = async (id, amount) => {
   return user;
 };
 
-const getLeaderboard = async () => {
-  const leaderboard = await userRepository.getLeaderboard();
-  return leaderboard;
-};
 
 module.exports = { createUser, getUserById, login, topup, getLeaderboard };
 

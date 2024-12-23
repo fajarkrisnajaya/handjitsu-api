@@ -88,14 +88,6 @@ const login = async (req, res) => {
   }
 };
 
-const getLeaderboard = async (req, res) => {
-  try {
-    const leaderboard = await userService.getLeaderboard();
-    res.status(200).json({ data: leaderboard });
-  } catch (error) {
-    res.status(error.statusCode || 500).json({ error: error.message });
-  }
-};
 
-module.exports = { createUser, getUserById, login, getTransactionsById, topup, getLeaderboard };
+module.exports = { createUser, getUserById, login, getTransactionsById, topup };
 

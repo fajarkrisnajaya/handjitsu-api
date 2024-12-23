@@ -68,24 +68,6 @@ const updateUserWinCount = async (winnerID) => {
   }
 };
 
-const getLeaderboard = async () => {
-  try {
-    const result = await pool.query(`
-      SELECT DISTINCT ON (user_id)
-        leaderboard_id,
-        user_id,
-        rank,
-        winrate,
-        last_played
-      FROM leaderboard
-      WHERE user_id != 9999
-      ORDER BY user_id, last_played DESC;
-    `);
-    return result.rows;
-  } catch (error) {
-    throw new Error("Something went wrong while fetching the leaderboard");
-  }
-};
 
 module.exports = {
   createUser,
@@ -94,5 +76,4 @@ module.exports = {
   findTransactionById,
   updateUserBalance,
   updateUserWinCount,
-  getLeaderboard,
 };
