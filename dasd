@@ -1,0 +1,131 @@
+[33mcommit a3aa4575515b2fb6cfbbd795b21e67c71cfcc7bc[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 17:39:16 2024 +0700
+
+    feat : wincount
+
+[33mcommit 7ac36401739b97e7cce583200f759ad2b8d8581c[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 17:19:35 2024 +0700
+
+    fix tie 0
+
+[33mcommit 7921b5e2443b8706bd9cbf69249ecff514db0050[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 17:15:26 2024 +0700
+
+    fix wincount and tie
+
+[33mcommit b6fd87be3912be0aad65d5b4305e7a709009bf87[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 17:09:33 2024 +0700
+
+    wincount fix
+
+[33mcommit 50bf843708e6069926cb77fa786fb693fd266d04[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 17:03:43 2024 +0700
+
+    fix player1 and winnerid
+
+[33mcommit 1d00b2dab32498a0aa7388bcf891b81187f8cbac[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 16:55:02 2024 +0700
+
+    implement wincount
+
+[33mcommit 04b05163bcc4bca4071b5fd6fc539cccba630f08[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 15:43:44 2024 +0700
+
+    hotfix fullname 5
+
+[33mcommit 6f19e599f2b94a1ff00217ead821636d0a152394[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 15:37:56 2024 +0700
+
+    hotfix fullname 4
+
+[33mcommit d50b1fcb98600cfc079cf77092a2332dd3225c93[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 15:33:03 2024 +0700
+
+    hotfix fullname 3
+
+[33mcommit 43351a78ebab3092c9608bd3f510fb6446e8c5bd[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 15:32:34 2024 +0700
+
+    hotfix fullnbame 2
+
+[33mcommit b808f95ec4ab866755c1096cac93bd9f76b678f0[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 15:28:55 2024 +0700
+
+    fix fullname to be removed
+
+[33mcommit 59af037280c12234621b71e46f628fc9bb193a64[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 15:25:42 2024 +0700
+
+    feat: register optinal fullnam
+
+[33mcommit d380f186b62b499f63af231c2acc90805cd2b118[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 02:29:22 2024 +0700
+
+    fix single
+
+[33mcommit 2cbcf3174334b316757c58fa6daf1bc0a2975bf0[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 02:17:21 2024 +0700
+
+    singleplayer fixes
+
+[33mcommit fbb47cb459fad9ff5cec76053778e07c00ef1b93[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 02:03:09 2024 +0700
+
+    fix single player
+
+[33mcommit 572e24b4aa74eb604f4d9d8f5d19c4fbf52c0804[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 01:39:18 2024 +0700
+
+    feat: singleplayer
+
+[33mcommit 11844b4ec3b2714bcf459348f5ad3a0859d25c97[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 01:28:31 2024 +0700
+
+    games push router
+
+[33mcommit c57351984297339ef478ff1ca895f06fa157bab0[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 01:21:48 2024 +0700
+
+    fix game with put method
+
+[33mcommit df126aebb4b4c68913899136ecb4c27b44dde0a9[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 01:04:02 2024 +0700
+
+    game service fix
+
+[33mcommit 05b6395f5efa95896568920dc46bef1868f5dfd2[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 01:00:35 2024 +0700
+
+    game root in index.js fixes
+
+[33mcommit bfd2fed064b2e37ce9c5fc7cdfc525eba1ef6e80[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Sun Dec 22 00:49:03 2024 +0700
+
+    feat: game endpoint
+
+[33mcommit 215e0a37596066879f3c082e38021279e43b4332[m[33m ([m[1;31morigin/frontend[m[33m)[m
+Author: Fajar krisna Jaya <fajarkrisnajayanti@gmail.com>
+Date:   Thu Dec 19 22:01:54 2024 +0700
+
+    init
