@@ -9,6 +9,6 @@ router.post("/auth/login", userController.login);
 router.get("/profile", authenticateToken, userController.getUserById);
 router.get("/transaction", userController.getTransactionsById);
 router.post("/topup", authenticateToken, userController.topup);
-router.get("/leaderboard", userController.getLeaderboard); // Ensure this line is present
+router.get("/leaderboard", authenticateToken,userController.getLeaderboard);
 
 module.exports = router;
