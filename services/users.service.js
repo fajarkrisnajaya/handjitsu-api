@@ -70,4 +70,3 @@ const getLeaderboard = async () => {
 
 module.exports = { createUser, getUserById, login, topup, getLeaderboard };
 
-module.exports = { createUser, getUserById, login, topup };

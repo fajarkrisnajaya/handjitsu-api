@@ -20,7 +20,6 @@ const findUserByEmail = async (email) => {
   }
 };
 
-
 const createUser = async (user) => {
   const { email, username, password, avatar_url } = user;
 
@@ -35,10 +34,12 @@ const createUser = async (user) => {
   }
 };
 
-
 const findTransactionById = async (id) => {
   try {
-    const result = await pool.query("SELECT * FROM transactions where id = $1", [id]);
+    const result = await pool.query(
+      "SELECT * FROM transactions where id = $1",
+      [id]
+    );
     return result.rows[0];
   } catch (error) {
     throw new Error("Something went wrong");
@@ -47,7 +48,10 @@ const findTransactionById = async (id) => {
 
 const updateUserBalance = async (id, balance) => {
   try {
-    await pool.query("UPDATE users SET balance = $1 WHERE id = $2", [balance, id]);
+    await pool.query("UPDATE users SET balance = $1 WHERE id = $2", [
+      balance,
+      id,
+    ]);
   } catch (error) {
     throw new Error("Something went wrong");
   }
@@ -55,7 +59,10 @@ const updateUserBalance = async (id, balance) => {
 
 const updateUserWinCount = async (winnerID) => {
   try {
-    await pool.query("UPDATE users SET win_count = win_count + 1 WHERE id = $1", [winnerID]);
+    await pool.query(
+      "UPDATE users SET win_count = win_count + 1 WHERE id = $1",
+      [winnerID]
+    );
   } catch (error) {
     throw new Error("Something went wrong while updating win count");
   }
@@ -80,5 +87,12 @@ const getLeaderboard = async () => {
   }
 };
 
-module.exports = { createUser, findUserByEmail, findUserById, findTransactionById, updateUserBalance, updateUserWinCount, getLeaderboard };
-module.exports = { createUser, findUserByEmail, findUserById, findTransactionById, updateUserBalance, updateUserWinCount };
+module.exports = {
+  createUser,
+  findUserByEmail,
+  findUserById,
+  findTransactionById,
+  updateUserBalance,
+  updateUserWinCount,
+  getLeaderboard,
+};
