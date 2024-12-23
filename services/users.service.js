@@ -64,5 +64,5 @@ const topup = async (id, amount) => {
 };
 
 
-module.exports = { createUser, getUserById, login, topup, getLeaderboard };
+module.exports = { createUser, getUserById, login, topup };
 
