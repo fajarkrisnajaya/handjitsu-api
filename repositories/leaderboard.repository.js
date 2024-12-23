@@ -8,9 +8,10 @@ const getLeaderboard = async () => {
       rank,
       winrate,
       last_played
-    FROM leaderboard
-    WHERE user_id != 9999
-    ORDER BY user_id, last_played DESC;
+      FROM leaderboard
+      WHERE user_id != 9999
+      ORDER BY user_id, winrate DESC;
+
   `);
   return result.rows;
 };
