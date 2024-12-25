@@ -34,17 +34,28 @@ const createSinglePlayerGame = async (gameData) => {
   return game;
 };
 
+const createMultiplayerGame = async (gameData) => {
+  const game = await gameRepository.createGame({
+    ...gameData,
+    isMultiplayer: true
+  });
+  return game;
+};
+
 const updateMultiplayerGame = async (gameId, gameData) => {
   const game = await gameRepository.getGameById(gameId);
-  if (!game) {
-    throw new Error("Game not found");
-  }
+  if (!game) throw new Error("Game not found");
+  
   const updatedGame = { ...game, ...gameData };
   if (updatedGame.Player1_choice && updatedGame.Player2_choice) {
-    updatedGame.WinnerID = determineWinner(updatedGame.Player1ID, updatedGame.Player2ID, updatedGame.Player1_choice, updatedGame.Player2_choice);
+    updatedGame.WinnerID = determineWinner(
+      updatedGame.Player1ID, 
+      updatedGame.Player2ID,
+      updatedGame.Player1_choice,
+      updatedGame.Player2_choice
+    );
   }
-  const result = await gameRepository.updateGame(gameId, updatedGame);
-  return result;
+  return await gameRepository.updateGame(gameId, updatedGame);
 };
 
 const determineWinner = (player1ID, player2ID, player1Choice, player2Choice) => {
@@ -61,4 +72,4 @@ const determineWinner = (player1ID, player2ID, player1Choice, player2Choice) => 
   }
 };
 
-module.exports = { createGame, updateGame, getGameById, createSinglePlayerGame, updateMultiplayerGame };
+module.exports = { createGame, updateGame, getGameById, createSinglePlayerGame, createMultiplayerGame,updateMultiplayerGame };

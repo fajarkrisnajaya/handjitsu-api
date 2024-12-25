@@ -45,4 +45,13 @@ const updateMultiplayerGame = async (req, res) => {
   }
 };
 
-module.exports = { createGame, getGameById, updateGame, createSinglePlayerGame, updateMultiplayerGame };
+
+const createMultiplayerGame = async (req, res) => {
+  try {
+    const game = await gameService.createMultiplayerGame(req.body);
+    res.status(201).json({ data: game });
+  } catch (error) {
+    res.status(error.statusCode || 500).json({ error: error.message });
+  }
+};
+module.exports = { createGame, getGameById, updateGame, createSinglePlayerGame, updateMultiplayerGame,createMultiplayerGame };
