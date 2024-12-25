@@ -1,5 +1,4 @@
 const pool = require('../db/db');
-
 const gameRepository = require('../repositories/games.repository');
 
 const createGame = async (gameData) => {
@@ -35,6 +34,19 @@ const createSinglePlayerGame = async (gameData) => {
   return game;
 };
 
+const updateMultiplayerGame = async (gameId, gameData) => {
+  const game = await gameRepository.getGameById(gameId);
+  if (!game) {
+    throw new Error("Game not found");
+  }
+  const updatedGame = { ...game, ...gameData };
+  if (updatedGame.Player1_choice && updatedGame.Player2_choice) {
+    updatedGame.WinnerID = determineWinner(updatedGame.Player1ID, updatedGame.Player2ID, updatedGame.Player1_choice, updatedGame.Player2_choice);
+  }
+  const result = await gameRepository.updateGame(gameId, updatedGame);
+  return result;
+};
+
 const determineWinner = (player1ID, player2ID, player1Choice, player2Choice) => {
   if (player1Choice === player2Choice) {
     return null; // It's a tie
@@ -49,4 +61,4 @@ const determineWinner = (player1ID, player2ID, player1Choice, player2Choice) => 
   }
 };
 
-module.exports = { createGame, updateGame, getGameById, createSinglePlayerGame };
+module.exports = { createGame, updateGame, getGameById, createSinglePlayerGame, updateMultiplayerGame };
